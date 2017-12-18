@@ -12,20 +12,16 @@ import android.widget.EditText
 /**
  * Created by monkey on 2017/12/18.
  */
-class CustomDialog: DialogFragment(){
+class CustomDialog : DialogFragment() {
     private lateinit var customDialog: Dialog
 
-    private val TAG = "CustomDialo"
+    private val TAG = "CustomDialog"
 
     companion object {
-        fun createDialog(): DialogFragment{
+        fun createDialog(): DialogFragment {
             val customDialog = CustomDialog()
             return customDialog
         }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -33,15 +29,21 @@ class CustomDialog: DialogFragment(){
 
         val builder = AlertDialog.Builder(context)
         builder.setMessage("カスタムダイアログ")
-                .setPositiveButton("はい") { dialog, which -> mOnPositiveClick()}
+                .setPositiveButton("はい") { dialog, which -> mOnPositiveClick() }
                 .setView(editText)
-                //.create()
 
         this.customDialog = builder.create()
+
+        this.customDialog.setOnShowListener(object : DialogInterface.OnShowListener {
+            override fun onShow(p0: DialogInterface?) {
+                Log.d(TAG, "onShow")
+            }
+        })
+
         return this.customDialog
     }
 
     private fun mOnPositiveClick() {
-        Log.d(TAG, "hoge")
+        Log.d(TAG, "positive button Clicked")
     }
 }

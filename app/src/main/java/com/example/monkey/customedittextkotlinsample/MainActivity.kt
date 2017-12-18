@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
 
         buttonActivityMain.setOnClickListener {
             val customDialog = CustomDialog.createDialog()
-            customDialog.show(supportFragmentManager, "hoge")
+            customDialog.show(supportFragmentManager, "")
         }
     }
 }
